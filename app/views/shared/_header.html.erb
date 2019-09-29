@@ -12,8 +12,11 @@
             <li class="nav-item <%= current_page("main", "help") %>"</li>
                 <%= link_to "Help", help_path, class: "nav-link" %>
             </li>
-            <li class="nav-item <%= current_page("main", "signin") %>"</li>
+            <li class="nav-item <%= current_page("users", "signin") %>"</li>
                 <%= link_to "Sign In", help_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item <%= current_page("users", "new") %>"</li>
+                <%= link_to "Sign Up", signup_path, class: "nav-link" %>
             </li>
         </ul>
     </div>

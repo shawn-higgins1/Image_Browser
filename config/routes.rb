@@ -6,5 +6,7 @@ Rails.application.routes.draw do
   get '/help', to: 'main#help', as: :help
   get  '/signup',  to: 'users#new', as: :signup
 
+  resource :users, only: [:show, :update, :create, :new]
+
   root 'main#home'
 end
