@@ -1,0 +1,20 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <%= link_to root_path, class: "navbar-brand", id: "logo" do %>
+        <%= image_tag "logo.jpg",  width: "60", height: "60", class: "rounded" %>
+        Image Browser
+    <% end %>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto navbar-right">
+            <li class="nav-item <%= current_page("main", "home") %>">
+                <%= link_to "Home", home_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item <%= current_page("main", "help") %>"</li>
+                <%= link_to "Help", help_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item <%= current_page("main", "signin") %>"</li>
+                <%= link_to "Sign In", help_path, class: "nav-link" %>
+            </li>
+        </ul>
+    </div>
+</nav>
