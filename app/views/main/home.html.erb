@@ -6,5 +6,7 @@
     Image Browser allows you to upload and manage your images. See help for more details.
   </h2>
 
-  <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
+  <% unless logged_in? %>
+    <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
+  <% end %>
 </div>

@@ -9,15 +9,37 @@
             <li class="nav-item <%= current_page("main", "home") %>">
                 <%= link_to "Home", home_path, class: "nav-link" %>
             </li>
+            <li class="nav-item <%= current_page("users", "signin") %>"</li>
+                <%= link_to "Gallery", signin_path, class: "nav-link" %>
+            </li>
             <li class="nav-item <%= current_page("main", "help") %>"</li>
                 <%= link_to "Help", help_path, class: "nav-link" %>
             </li>
-            <li class="nav-item <%= current_page("users", "signin") %>"</li>
-                <%= link_to "Sign In", help_path, class: "nav-link" %>
-            </li>
-            <li class="nav-item <%= current_page("users", "new") %>"</li>
-                <%= link_to "Sign Up", signup_path, class: "nav-link" %>
-            </li>
+
+            <% if logged_in? %>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                      Account <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        <li class="dropdown-item"><%= link_to "Profile", '#' %></li>
+                        <li class="dropdown-item">
+                            <%= link_to "Upload photos", signin_path %>
+                        </li>
+                        <li class="dropdown-divider"></li>
+                        <li class="dropdown-item">
+                            <%= link_to "Sign out", sign_out_path, method: :delete %>
+                        </li>
+                    </ul>
+                </li>
+            <% else %>
+                <li class="nav-item <%= current_page("users", "signin") %>"</li>
+                    <%= link_to "Sign In", signin_path, class: "nav-link" %>
+                </li>
+                <li class="nav-item <%= current_page("users", "new") %>"</li>
+                    <%= link_to "Sign Up", signup_path, class: "nav-link" %>
+                </li>
+            <% end %>
         </ul>
     </div>
 </nav>
