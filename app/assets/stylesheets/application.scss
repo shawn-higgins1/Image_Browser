@@ -109,3 +109,12 @@ footer ul li {
     float: left;
     margin-left: 15px;
 }
+
+img {
+    image-orientation: from-image;
+}
+
+.image-thumbnail{
+    max-width: 100%;
+    height: auto;
+}

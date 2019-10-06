@@ -1,0 +1,16 @@
+<% provide(:title, 'Gallery') %>
+
+<div class="row pt-2">
+    <% @photos.each do |photo| %>
+        <div class="col-md-4 col-sm-6 pt-2">
+            <div class="img-thumbnail">
+                <%= link_to url_for(photo.image) do %>
+                    <%= image_tag photo.image, class: "image-thumbnail" %>
+                <% end %>
+                <div class="caption">
+                    <p><%= photo.title %></p>
+                </div>
+            </div>
+        </div>
+    <% end %>
+</div>

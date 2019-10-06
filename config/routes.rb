@@ -6,12 +6,18 @@ Rails.application.routes.draw do
   get '/help', to: 'main#help', as: :help
 
   # Sign in and sign up routes
-  get  '/signup',  to: 'users#new', as: :signup
+  get '/signup', to: 'users#new', as: :signup
   get    '/signin',   to: 'sessions#new', as: :signin
   post   '/signin',   to: 'sessions#create'
-  delete '/signin',  to: 'sessions#destroy', as: :sign_out
+  delete '/signin', to: 'sessions#destroy', as: :sign_out
 
-  resource :users, only: [:show, :update, :create, :new]
+  resource :users, only: [:create, :new]
+
+  # Routes related to photos
+  get '/upload', to: 'photos#new', as: :new_photo
+  post '/upload', to: 'photos#upload', as: :upload_photos
+  delete '/upload', to: 'photos#delete', as: :delete_photos
+  get '/gallery', to: 'photos#show', as: :show_photos
 
   root 'main#home'
 end

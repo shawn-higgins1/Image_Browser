@@ -1,0 +1,24 @@
+<% provide(:title, 'Upload photos') %>
+<h1>Upload some new photos</h1>
+
+<div class="row justify-content-center">
+    <div class="col-md-6"> 
+        <%= form_for(:photos, url: upload_photos_path, method: :post, multipart: true) do |f| %>
+            <div class="form-group">
+                <%= f.label :title, "Photo title (All uploaded photos will have this title)", class: "form-label" %>
+                <%= f.text_field :title, class: 'form-control' %>
+
+                <div class="form-check pl-0 pt-2">
+                    <%= f.label :visibility, "Share these images publically?", class: "form-label" %>
+                    <%= f.check_box :visibility, class: "form-check-input ml-1 align-checkbox" %>
+                </div>
+
+                <%= f.label :images, "Photos", class: "form-label" %>
+                <%= f.file_field :images, id: "image-upload", class: 'form-control', multiple: true, direct_upload: true, accept: 'image/*' %>
+                
+            </div>
+            <%= f.submit "Upload photos", class: "btn btn-primary mt-2" %>
+        <% end %>
+
+    </div>
+</div>

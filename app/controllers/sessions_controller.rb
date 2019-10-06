@@ -1,10 +1,13 @@
+# frozen_string_literal: true
+
 class SessionsController < ApplicationController
   def new
+    redirect_to root_path if current_user
   end
 
   def create
     user = User.find_by(email: params[:session][:email].downcase)
-    if user && user.authenticate(params[:session][:password])
+    if user&.authenticate(params[:session][:password])
       signin(user)
       redirect_to root_path
     else
