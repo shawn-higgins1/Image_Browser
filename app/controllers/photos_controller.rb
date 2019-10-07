@@ -17,8 +17,7 @@ class PhotosController < ApplicationController
 
         files.each do |file|
             new_photo = Photo.new(owner: @current_user, visibility: photo_params[:visibility],
-                                    title: photo_params[:title])
-            new_photo.image.attach(file)
+                                    title: photo_params[:title], image: file)
 
             unless new_photo.save!
                 flash[:alert] = "" if flash[:alert].nil?
