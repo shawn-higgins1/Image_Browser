@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class PhotosController < ApplicationController
-    before_action :verify_logged_in, except: [:gallery, :show, :download]
+    before_action :verify_logged_in, except: [:gallery, :show, :download, :search]
     before_action :verify_ownership, only: [:edit, :update]
     before_action :verify_access, only: [:show, :download]
 
@@ -46,10 +46,28 @@ class PhotosController < ApplicationController
         redirect_to gallery_path
     end
 
-    def gallery
-        @photos = Photo.where(visibility: true)
+    def search
+        redirect_to gallery_path(search_params)
+    end
 
-        @photos = @photos.or(current_user.photos) if current_user
+    def gallery
+        query_string = if (search_params[:visibility].nil? || search_params[:visibility] == "Any") &&
+                          !current_user.nil?
+            "(visibility = true OR (visibility = false AND users.id = #{current_user.id}))"
+        elsif search_params[:visibility] == "Private"
+            "visibility = false AND users.id = #{current_user.id}"
+        else
+            "visibility = true"
+        end
+
+        search_param = ""
+        if params[:search_query].present?
+            query_string += " AND (title LIKE :search OR users.username LIKE :search)"
+            search_param = "%#{params[:search_query]}%"
+        end
+
+        @search_params = search_params
+        @photos = Photo.joins(:owner).where(query_string, search: search_param)
     end
 
     def edit
@@ -57,7 +75,7 @@ class PhotosController < ApplicationController
 
     def update
         if @photo.update(photo_params)
-            flash[:success] = "Succesfuly edited the photo"
+            flash[:success] = "Succesfully edited the photo"
             redirect_to gallery_path
         else
             flash[:alert] = "Failed to edit the photo"
@@ -100,5 +118,9 @@ class PhotosController < ApplicationController
 
     def photo_params
         params.require(:photo).permit(:title, :visibility)
+    end
+
+    def search_params
+        params.permit(:search_query, :visibility)
     end
 end

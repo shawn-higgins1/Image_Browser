@@ -9,10 +9,16 @@
                 </li>
             <% end %>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+        <%= form_with url: search_photos_path, method: :post, class: "form-inline my-2 my-lg-0" do |f| %>
+            <% if current_user %>
+                <div class="form-group pr-1">
+                    <%= f.label :visibility, "Visibility: ", class: "form-label pr-1" %>
+                    <%= f.select :visibility, options_for_select([["Any", "Any"], ["Public", "Public"], ["Private", "Private"]], @search_params[:visibility]), {}, { class: "form-control pl-1" } %>
+                </div>
+            <% end %>
+            <%= f.text_field :search_query, value: @search_params[:search_query], class: "form-control mr-sm-2" %>
+            <%= f.button "Search", type: "submit", class: "btn btn-outline-success my-2 my-sm-0" %>
+        <% end %>
     </div>
 </nav>
 

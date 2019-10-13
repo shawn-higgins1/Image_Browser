@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   post '/upload', to: 'photos#upload', as: :upload_photos
   delete '/upload', to: 'photos#delete', as: :delete_photos
   get '/gallery', to: 'photos#gallery', as: :gallery
+  post '/gallery/search', to: 'photos#search', as: :search_photos
   get '/gallery/:id', to: 'photos#show', as: :show_photo
 
   scope '/photo' do
