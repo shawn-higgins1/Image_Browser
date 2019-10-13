@@ -8,6 +8,7 @@ require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 require('custom/direct_upload.js')
+require('custom/select_images.js')
 
 import "bootstrap"
 import "../stylesheets/application"

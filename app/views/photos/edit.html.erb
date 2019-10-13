@@ -1,0 +1,4 @@
+<% provide(:title, 'Edit photos') %>
+<h1>Edit your photo</h1>
+
+<%= render "photos/shared/photo_form", photo: @photo, submit_url: update_photo_path, upload_images: false, submit_msg: "Update your Photo", submit_method: :patch %>

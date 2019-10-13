@@ -17,7 +17,14 @@ Rails.application.routes.draw do
   get '/upload', to: 'photos#new', as: :new_photo
   post '/upload', to: 'photos#upload', as: :upload_photos
   delete '/upload', to: 'photos#delete', as: :delete_photos
-  get '/gallery', to: 'photos#show', as: :show_photos
+  get '/gallery', to: 'photos#gallery', as: :gallery
+  get '/gallery/:id', to: 'photos#show', as: :show_photo
+
+  scope '/photo' do
+    get '/download/:id', to: "photos#download", as: :download_photo
+    get '/edit/:id', to: 'photos#edit', as: :edit_photo
+    patch '/edit', to: 'photos#update', as: :update_photo
+  end
 
   root 'main#home'
 end

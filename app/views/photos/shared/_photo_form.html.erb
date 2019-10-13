@@ -1,0 +1,25 @@
+<div class="row justify-content-center">
+    <div class="col-md-6"> 
+        <%= form_for(photo, url: submit_url, method: submit_method, multipart: true) do |f| %>
+            <div class="form-group">
+                <%= f.hidden_field :id %>
+
+                <%= f.label :title, "Photo title (All uploaded photos will have this title)", class: "form-label" %>
+                <%= f.text_field :title, class: 'form-control' %>
+
+                <div class="form-check pl-0 pt-2">
+                    <%= f.label :visibility, "Share these images publically?", class: "form-label" %>
+                    <%= f.check_box :visibility, class: "form-check-input ml-1 align-checkbox" %>
+                </div>
+
+                <% if upload_images %>
+                    <%= f.label :images, "Photos", class: "form-label" %>
+                    <%= f.file_field :images, id: "image-upload", class: 'form-control', multiple: true, direct_upload: true, accept: 'image/*' %>
+                <% else %>
+                    <%= image_tag photo.image, class: "img-fluid" %>
+                <% end %>
+            </div>
+            <%= f.submit submit_msg, class: "btn btn-primary mt-2" %>
+        <% end %>
+    </div>
+</div>

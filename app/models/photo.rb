@@ -1,25 +1,25 @@
 # frozen_string_literal: true
 
 class Photo < ApplicationRecord
-    belongs_to :owner, class_name: 'User', foreign_key: :user_id
+    belongs_to :owner, class_name: 'User', foreign_key: :user_id, inverse_of: :photos
     has_one_attached :image
 
-    def scaleImage(preferredWidth, preferredHeight)
-        imageData = ActiveStorage::Analyzer::ImageAnalyzer.new(image).metadata;
-        newWidth = imageData[:width]
-        newHeight = imageData[:height]
+    def scale_image(preferred_width, preferred_height)
+        image_data = ActiveStorage::Analyzer::ImageAnalyzer.new(image).metadata
+        new_width = image_data[:width]
+        new_height = image_data[:height]
 
-        if(newWidth > preferredWidth)
-            newWidth = preferredWidth;
-            newHeight = (newHeight * newWidth)/imageData[:width];
+        if new_width > preferred_width
+            new_width = preferred_width
+            new_height = (new_height * new_width) / image_data[:width]
         end
 
-        if(newHeight > preferredHeight)
-            oldHeight = newHeight;
-            newHeight = preferredHeight;
-            newWidth = (newWidth * newHeight) / oldHeight;
+        if new_height > preferred_height
+            old_height = new_height
+            new_height = preferred_height
+            new_width = (new_width * new_height) / old_height
         end
 
-        image.variant(resize_to_limit: [newWidth, newHeight])
-    end        
+        image.variant(resize_to_limit: [new_width, new_height])
+    end
 end

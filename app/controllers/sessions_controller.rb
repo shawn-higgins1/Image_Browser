@@ -20,4 +20,11 @@ class SessionsController < ApplicationController
     sign_out
     redirect_to root_path
   end
+
+  private
+
+  def sign_out
+    session.delete(:user_id)
+    @current_user = nil
+  end
 end

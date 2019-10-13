@@ -1,0 +1,44 @@
+<% provide(:title, 'Gallery') %>
+
+<nav class="navbar navbar-expand-sm navbar-light bg-light">
+    <div class="navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <% if current_user %>
+                <li class="nav-item">
+                    <%= link_to "Delete selected files", delete_photos_path, id: "delete-selected", method: :delete, class: "btn btn-danger", data: {confirm: "Are you sure? This action can't be undone"} %>
+                </li>
+            <% end %>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
+
+<div class="row pt-2">
+    <% @photos.each do |photo| %>
+        <div class="col-md-4 col-sm-6 pt-2">
+            <div class="img-thumbnail <%= "selectable" if owner?(photo) %>" data-id="<%= photo.id %>">
+                <h4 class="text-dark title"><%= photo.title.empty?? photo.image.filename : photo.title %></h4>
+                <%= link_to show_photo_path(photo) do %>
+                    <%= image_tag photo.image, class: "img-fluid" %>
+                <% end %>
+                <div>
+                    <p>Uploaded by: <%= photo.owner.username %></p>
+                    <p>Uploaded at: <%= photo.created_at %>
+                    <% if owner?(photo) %>
+                        <p>Visibility: <%= photo.visibility ? "Public" : "Private" %></p>
+                    <% end %>
+                    <% if owner?(photo) %>
+                        <%= link_to "Edit", edit_photo_path(photo), class: "btn btn-primary" %>
+                    <% end %>
+                    <%= link_to "Download", download_photo_path(photo), class: "btn btn-primary" %>
+                    <% if owner?(photo) %>
+                        <%= link_to "Delete", delete_photos_path(ids: [photo.id]), method: :delete, class: "btn btn-danger", data: {confirm: "Are you sure? This action can't be undone"} %>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    <% end %>
+</div>
