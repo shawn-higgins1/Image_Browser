@@ -4,24 +4,31 @@ class ResetPasswordController < ApplicationController
     before_action :verify_email_enabled
     before_action :verify_user, except: [:forgot_password]
 
+    # Render form where user can enter email address for retrieval
     def forgot_password
     end
 
+    # Send the password reset email
     def send_email
+        # Send the email
         ResetPasswordMailer.with(user: @user)
                            .reset_password(request.host || Rails.configuration.default_host)
 
+        # Notify the user that the email was sent
         flash[:success] = "We've sent your password reset email." \
                             " Check your email and follow the instructions to reset your password."
 
         redirect_to root_path
     end
 
+    # Display the form where the user can enter their new password
     def edit_password
         @token = params[:token]
     end
 
+    # Reset the users password if the token is valid
     def reset_password
+        # Verify that the token exists
         token = params[:token]
 
         if token.nil?
@@ -29,6 +36,7 @@ class ResetPasswordController < ApplicationController
             return redirect_to root_path
         end
 
+        # If the token is valid update the users password
         if @user.verify_token("reset_password", token) &&
            @user.update(params.require(:user).permit(:password, :password_confirmation))
                 flash[:success] = "Succesfully reset your password"
@@ -41,6 +49,7 @@ class ResetPasswordController < ApplicationController
 
   private
 
+    # Verify that the supplied user existing either from the id param of the email param
     def verify_user
         @user = User.find_by(id: params[:id]) || User.find_by(email: params[:email])
 
@@ -48,9 +57,5 @@ class ResetPasswordController < ApplicationController
             flash[:alert] = "Couldn't send the password reset email. The supplied user was invalid."
             return redirect_to root_path
         end
-    end
-
-    def verify_email_enabled
-        return redirect_to root_path unless Rails.configuration.email_enabled
     end
 end

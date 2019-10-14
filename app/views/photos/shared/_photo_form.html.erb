@@ -14,7 +14,7 @@
 
                 <% if upload_images %>
                     <%= f.label :images, "Photos", class: "form-label" %>
-                    <%= f.file_field :images, id: "image-upload", class: 'form-control', multiple: true, direct_upload: true, accept: 'image/*' %>
+                    <%= f.file_field :images, id: "image-upload", class: 'form-control', multiple: true, direct_upload: true, required: true, accept: 'image/*' %>
                 <% else %>
                     <%= image_tag photo.image, class: "img-fluid" %>
                 <% end %>

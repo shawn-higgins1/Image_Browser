@@ -36,13 +36,15 @@
                     <% if owner?(photo) %>
                         <p>Visibility: <%= photo.visibility ? "Public" : "Private" %></p>
                     <% end %>
-                    <% if owner?(photo) %>
-                        <%= link_to "Edit", edit_photo_path(photo), class: "btn btn-primary" %>
-                    <% end %>
-                    <%= link_to "Download", download_photo_path(photo), class: "btn btn-primary" %>
-                    <% if owner?(photo) %>
-                        <%= link_to "Delete", delete_photos_path(ids: [photo.id]), method: :delete, class: "btn btn-danger", data: {confirm: "Are you sure? This action can't be undone"} %>
-                    <% end %>
+                    <div class="text-right">
+                        <% if owner?(photo) %>
+                            <%= link_to "Edit", edit_photo_path(photo), class: "btn btn-primary" %>
+                        <% end %>
+                        <%= link_to "Download", download_photo_path(photo), class: "btn btn-primary" %>
+                        <% if owner?(photo) %>
+                            <%= link_to "Delete", delete_photos_path(ids: [photo.id]), method: :delete, class: "btn btn-danger", data: {confirm: "Are you sure? This action can't be undone"} %>
+                        <% end %>
+                    </div>
                 </div>
             </div>
         </div>
