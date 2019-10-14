@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class EmailVerificationController < ApplicationController
+    before_action :verify_email_enabled
+
     def send_email
         user = User.find_by(id: params[:id])
 
@@ -8,6 +10,8 @@ class EmailVerificationController < ApplicationController
             flash[:alert] = "Couldn't send the account activation email. The supplied user was invalid."
             return redirect_to root_path
         end
+
+        return redirect_to root_path if user.email_verified
 
         EmailVerificationMailer.with(user: user)
                                .email_verification(request.host || Rails.configuration.default_host)
@@ -43,5 +47,11 @@ class EmailVerificationController < ApplicationController
         end
 
         redirect_to root_path
+    end
+
+  private
+
+    def verify_email_enabled
+        return redirect_to root_path unless Rails.configuration.email_enabled
     end
 end

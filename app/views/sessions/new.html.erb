@@ -15,8 +15,9 @@
             <%= f.submit "Log in", class: "btn btn-primary mt-2" %>
         <% end %>
 
-        <p> Forgot your password? Click <%= link_to "here", forgot_password_form_path %> to reset it</p>
-
+        <% if Rails.configuration.email_enabled %>
+            <p> Forgot your password? Click <%= link_to "here", forgot_password_form_path %> to reset it</p>
+        <% end %>
         <p>New user? <%= link_to "Sign up now!", signup_path %></p>
     </div>
 </div>

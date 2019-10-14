@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class ResetPasswordController < ApplicationController
+    before_action :verify_email_enabled
     before_action :verify_user, except: [:forgot_password]
 
     def forgot_password
@@ -47,5 +48,9 @@ class ResetPasswordController < ApplicationController
             flash[:alert] = "Couldn't send the password reset email. The supplied user was invalid."
             return redirect_to root_path
         end
+    end
+
+    def verify_email_enabled
+        return redirect_to root_path unless Rails.configuration.email_enabled
     end
 end
