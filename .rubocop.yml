@@ -1,4 +1,7 @@
-require: rubocop-rails
+require: 
+  - rubocop-rails
+  - rubocop-faker
+  - rubocop-rspec
 
 AllCops:
   Exclude:
@@ -138,3 +141,6 @@ Metrics/CyclomaticComplexity:
 # Checks for method parameter names that contain capital letters, end in numbers, or do not meet a minimal length.
 Naming/UncommunicativeMethodParamName:
   Enabled: false
+
+RSpec/MultipleExpectations:
+   Max: 5

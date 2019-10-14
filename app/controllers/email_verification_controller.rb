@@ -11,7 +11,7 @@ class EmailVerificationController < ApplicationController
 
         # Send the email
         EmailVerificationMailer.with(user: @user)
-                               .email_verification(request.host || Rails.configuration.default_host)
+                               .email_verification(request.host || Rails.configuration.default_host).deliver_later
 
         # Notify the user that the email has been sent and redirect to the homepage
         flash[:success] = "We've sent your account activation email." \

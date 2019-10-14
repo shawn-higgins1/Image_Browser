@@ -51,6 +51,6 @@ class User < ApplicationRecord
 
     # Determine whether or not the password is being updated
     def password_update
-        !password_confirmation.nil?
+        !password_confirmation.nil? || !password.nil?
     end
 end

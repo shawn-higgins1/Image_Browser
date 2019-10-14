@@ -2,17 +2,29 @@
 
 require 'rails_helper'
 
-# Specs in this file have access to a helper object that includes
-# the TestHelper. For example:
-#
-# describe TestHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       expect(helper.concat_strings("this","that")).to eq("this that")
-#     end
-#   end
-# end
-
 RSpec.describe ApplicationHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+    describe "#get_title" do
+        it "returns base title if none is specified" do
+            expect(helper.get_title).to eql("Image Browser")
+        end
+
+        it "returns appended title if one is specified" do
+            expect(helper.get_title("Home")).to eql("Home | Image Browser")
+        end
+    end
+
+    describe "#current_page" do
+        before do
+            allow(controller).to receive(:controller_name).and_return('photos')
+            allow(controller).to receive(:action_name).and_return('gallery')
+        end
+
+        it "returns active for active page" do
+            expect(helper.current_page('photos', 'gallery')).to eql("active")
+        end
+
+        it "returns nothing for inactive page" do
+            expect(helper.current_page('photos', 'upload')).to be(nil)
+        end
+    end
 end

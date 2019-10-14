@@ -6,4 +6,5 @@ and manage their images.
 
 You can run this application just like any other rails 6 application. However, you
 need to have postregsql installed even in development because sqlite was running
-into issue with active storage.
+into issue with active storage. You also need to install imagemagick with support
+for all the files you plan on uploading

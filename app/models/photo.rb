@@ -26,7 +26,7 @@ class Photo < ApplicationRecord
             new_width = (new_width * new_height) / old_height
         end
 
-        # Resive the image
+        # Return the resized image
         image.variant(resize_to_limit: [new_width, new_height])
     end
 end

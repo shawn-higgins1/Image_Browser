@@ -40,11 +40,17 @@ group :development, :test do
     gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
     gem 'rubocop', require: false
     gem 'rubocop-rails', require: false
+    gem 'rubocop-faker', require: false
+    gem 'rubocop-rspec', require: false
     gem 'dotenv-rails'
 
     gem "rspec-rails"
     gem 'coveralls', require: false
     gem 'simplecov', require: false
+    gem 'shoulda-matchers', '~> 3.1'
+
+    gem 'faker'
+    gem "factory_bot_rails"
 end
 
 group :development do
