@@ -12,7 +12,7 @@ class ResetPasswordController < ApplicationController
                            .reset_password(request.host || Rails.configuration.default_host)
 
         flash[:success] = "We've sent your password reset email." \
-                            " Check your email and follow the instructions to reset your account."
+                            " Check your email and follow the instructions to reset your password."
 
         redirect_to root_path
     end

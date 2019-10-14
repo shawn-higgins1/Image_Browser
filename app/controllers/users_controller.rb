@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
+    before_action :verify_logged_in, only: [:edit, :update]
     def new
         redirect_to root_path if current_user
 
@@ -26,6 +27,27 @@ class UsersController < ApplicationController
 
             redirect_to signup_path
         end
+    end
+
+    def edit
+        @user = current_user
+    end
+
+    def update
+        user = User.find_by(id: params[:id])
+
+        if user.nil? || user != current_user
+            flash[:alert] = "You can only edit your own profile"
+            return redirect_to root_path
+        end
+
+        if user.update(user_params.permit(:username))
+            flash[:success] = "Successfully update your user profile"
+        else
+            flash[:alert] = "Failed to update your user profile"
+        end
+
+        redirect_to edit_users_path(user)
     end
 
   private

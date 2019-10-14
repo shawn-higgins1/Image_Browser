@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   post   '/signin',   to: 'sessions#create'
   delete '/signin', to: 'sessions#destroy', as: :sign_out
 
-  resource :users, only: [:create, :new]
+  resource :users, only: [:create, :new, :edit, :update]
 
   # Routes related to photos
   get '/upload', to: 'photos#new', as: :new_photo
