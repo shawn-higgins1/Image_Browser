@@ -44,7 +44,8 @@ group :development, :test do
     gem 'rubocop-rspec', require: false
     gem 'dotenv-rails'
 
-    gem "rspec-rails"
+    gem 'rspec-rails', '~> 4.0.0.beta2'
+    gem 'rails-controller-testing'
     gem 'coveralls', require: false
     gem 'simplecov', require: false
     gem 'shoulda-matchers', '~> 3.1'

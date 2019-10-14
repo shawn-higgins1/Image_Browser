@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
             # don't log the user in instead just notify them that they need to
             # verify their account
             if Rails.configuration.email_enabled && !user.email_verified
-                flash[:alert] = "You must verify your email address before you can access ImageBrowser." \
+                flash[:info] = "You must verify your email address before you can access ImageBrowser." \
                                 " Please check your email for the verification email or click" \
                                 " <a href=\"#{send_email_verification_path(user)}\">here</a>" \
                                 " to resend the email."
@@ -37,15 +37,9 @@ class SessionsController < ApplicationController
 
     # Sign out the user and redirect the to the home page
     def destroy
-        sign_out
-        redirect_to root_path
-    end
-
-  private
-
-    # Signout the current user by deleting their user id from the session
-    def sign_out
         session.delete(:user_id)
         @current_user = nil
+
+        redirect_to root_path
     end
 end

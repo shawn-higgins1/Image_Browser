@@ -59,7 +59,7 @@ class UsersController < ApplicationController
         end
 
         # Redirect the user to their update profile
-        redirect_to edit_users_path(user)
+        redirect_to edit_users_path
     end
 
   private
