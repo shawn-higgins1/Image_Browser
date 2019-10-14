@@ -28,13 +28,7 @@ class ResetPasswordController < ApplicationController
 
     # Reset the users password if the token is valid
     def reset_password
-        # Verify that the token exists
         token = params[:token]
-
-        if token.nil?
-            flash[:alert] = "Invalid attempt to reset your password."
-            return redirect_to root_path
-        end
 
         # If the token is valid update the users password
         if @user.verify_token("reset_password", token) &&

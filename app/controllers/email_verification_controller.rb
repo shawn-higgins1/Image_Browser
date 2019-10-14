@@ -22,13 +22,7 @@ class EmailVerificationController < ApplicationController
 
     # Process the email verification
     def verify_account
-        # Retrieve the token and verify that it is a valid token
         token = params[:token]
-
-        if token.nil?
-            flash[:alert] = "Invalid attempt to authenticate your account."
-            return redirect_to root_path
-        end
 
         # Verfiy that the specified token matches the specified users token
         if !@user.verify_token("email_verification", token)
