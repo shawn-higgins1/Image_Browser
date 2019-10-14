@@ -34,3 +34,6 @@
 yarn-debug.log*
 .yarn-integrity
 .env
+
+# Ignore the coverage folder
+/coverage/*
