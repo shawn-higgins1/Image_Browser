@@ -11,14 +11,11 @@
                 <%= f.label :email, class: "form-label" %>
                 <%= f.email_field :email, class: 'form-control', required: true %>
 
-                <%= f.label :avatar, class: "form-label" %>
-                <%= f.file_field :avatar, class: 'form-control' %>
-
                 <%= f.label :password, class: "form-label" %>
                 <%= f.password_field :password, class: 'form-control', required: true %>
 
-                <%= f.label :password_confirmation, "Password Confirmation", class: "form-label", required: true%>
-                <%= f.password_field :password_confirmation, class: 'form-control' %>
+                <%= f.label :password_confirmation, "Password Confirmation", class: "form-label"%>
+                <%= f.password_field :password_confirmation, class: 'form-control', required: true %>
             </div>
             <%= f.submit "Create my account", class: "btn btn-primary mt-2" %>
         <% end %>

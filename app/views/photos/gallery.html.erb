@@ -32,7 +32,7 @@
                 <% end %>
                 <div>
                     <p>Uploaded by: <%= photo.owner.username %></p>
-                    <p>Uploaded at: <%= photo.created_at %>
+                    <p>Uploaded at: <%= photo.created_at.localtime.strftime("%d/%m/%Y %l:%M %P") %>
                     <% if owner?(photo) %>
                         <p>Visibility: <%= photo.visibility ? "Public" : "Private" %></p>
                     <% end %>

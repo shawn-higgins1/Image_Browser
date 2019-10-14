@@ -27,5 +27,17 @@ Rails.application.routes.draw do
     patch '/edit', to: 'photos#update', as: :update_photo
   end
 
+  scope '/password' do
+    get '/forgot', to: 'reset_password#forgot_password', as: :forgot_password_form
+    post '/forgot/send', to: 'reset_password#send_email', as: :forgot_password
+    get '/reset/:token/:id', to: 'reset_password#edit_password', as: :new_password
+    post '/reset/:token/:id', to: 'reset_password#reset_password', as: :reset_password
+  end
+
+  scope '/email' do
+    get '/send/:id', to: 'email_verification#send_email', as: :send_email_verification
+    get '/verify/:token/:id', to: 'email_verification#verify_account', as: :verify_email
+  end
+
   root 'main#home'
 end
