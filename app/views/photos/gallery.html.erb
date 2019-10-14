@@ -50,3 +50,7 @@
         </div>
     <% end %>
 </div>
+
+<div class="row justify-content-center pt-2">
+    <%= will_paginate @photos, renderer: WillPaginate::ActionView::Bootstrap4LinkRenderer %>
+</div>

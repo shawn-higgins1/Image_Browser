@@ -88,6 +88,9 @@ class PhotosController < ApplicationController
             @photos = @photos.where(query_string, search: search_param)
         end
 
+        # Paginate the results
+        @photos = @photos.paginate(page: params[:page]).order(created_at: :desc)
+
         # Store the search params so the search bar has the correct search fields
         @search_params = search_params
     end

@@ -79,6 +79,8 @@ GEM
     bindex (0.8.1)
     bootsnap (1.4.5)
       msgpack (~> 1.0)
+    bootstrap-will_paginate (1.0.0)
+      will_paginate
     builder (3.2.3)
     byebug (11.0.1)
     capybara (3.29.0)
@@ -240,6 +242,7 @@ GEM
     websocket-driver (0.7.1)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.4)
+    will_paginate (3.1.8)
     xpath (3.2.0)
       nokogiri (~> 1.8)
     zeitwerk (2.1.10)
@@ -251,6 +254,7 @@ DEPENDENCIES
   aws-sdk-s3
   bcrypt (~> 3.1.7)
   bootsnap (>= 1.4.2)
+  bootstrap-will_paginate
   byebug
   capybara (>= 2.15)
   dotenv-rails
@@ -272,6 +276,7 @@ DEPENDENCIES
   web-console (>= 3.3.0)
   webdrivers
   webpacker (~> 4.0)
+  will_paginate (~> 3.1.1)
 
 RUBY VERSION
    ruby 2.6.3p62
