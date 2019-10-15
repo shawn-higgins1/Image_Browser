@@ -10,5 +10,5 @@ and manage their images.
 
 You can run this application just like any other rails 6 application. However, you
 need to have postregsql installed even in development because sqlite was running
-into issue with active storage. You also need to install imagemagick with support
+into issue with active storage. For postgresql create a db called imagebrowser_development and specify your postgresql user credentials in the .env file. To create the .env file just copy and rename the sampl.env file and fill in the applicable values. You also need to install imagemagick with support
 for all the files you plan on uploading
