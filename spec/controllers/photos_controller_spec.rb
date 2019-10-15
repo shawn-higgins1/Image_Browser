@@ -141,7 +141,6 @@ RSpec.describe PhotosController, type: :controller do
                 get :gallery
 
                 expect(assigns(:photos).count).to eq(2)
-                expect(assigns(:search_params)).to eq({})
                 expect(response).to render_template(:gallery)
             end
 
@@ -150,7 +149,6 @@ RSpec.describe PhotosController, type: :controller do
 
                 expect(assigns(:photos).count).to eq(1)
                 expect(assigns(:photos).first.title).to eq("Test")
-                expect(assigns(:search_params)).to eq("search_query" => "Test")
                 expect(response).to render_template(:gallery)
             end
         end
@@ -170,7 +168,6 @@ RSpec.describe PhotosController, type: :controller do
                 get :gallery
 
                 expect(assigns(:photos).count).to eq(4)
-                expect(assigns(:search_params)).to eq({})
                 expect(response).to render_template(:gallery)
             end
 
@@ -178,7 +175,6 @@ RSpec.describe PhotosController, type: :controller do
                 get :gallery, params: { visibility: "Any" }
 
                 expect(assigns(:photos).count).to eq(4)
-                expect(assigns(:search_params)).to eq("visibility" => "Any")
                 expect(response).to render_template(:gallery)
             end
 
@@ -186,7 +182,6 @@ RSpec.describe PhotosController, type: :controller do
                 get :gallery, params: { visibility: "Private" }
 
                 expect(assigns(:photos).count).to eq(1)
-                expect(assigns(:search_params)).to eq("visibility" => "Private")
                 expect(response).to render_template(:gallery)
             end
 
@@ -194,7 +189,6 @@ RSpec.describe PhotosController, type: :controller do
                 get :gallery, params: { visibility: "Public" }
 
                 expect(assigns(:photos).count).to eq(3)
-                expect(assigns(:search_params)).to eq("visibility" => "Public")
                 expect(response).to render_template(:gallery)
             end
 
@@ -202,7 +196,6 @@ RSpec.describe PhotosController, type: :controller do
                 get :gallery, params: { visibility: "Public", search_query: "Test" }
 
                 expect(assigns(:photos).count).to eq(2)
-                expect(assigns(:search_params)).to eq("visibility" => "Public", "search_query" => "Test")
                 expect(response).to render_template(:gallery)
             end
         end

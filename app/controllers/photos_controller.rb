@@ -94,7 +94,7 @@ class PhotosController < ApplicationController
         @photos = @photos.paginate(page: params[:page]).order(created_at: :desc)
 
         # Store the search params so the search bar has the correct search fields
-        @search_params = search_params.to_hash
+        @search_params = search_params
     end
 
     # Display the photo and metadata for editing
