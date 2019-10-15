@@ -301,14 +301,14 @@ RSpec.describe PhotosController, type: :controller do
         it "show photo" do
             photo = create(:photo, visibility: true)
 
-            get :download, params: { id: photo.id }
+            get :show, params: { id: photo.id }
 
             Rails.application.routes.default_url_options[:host] = 'test.host'
-            expect(response).to redirect_to(url_for(photo.image) + "?disposition=attachment")
+            expect(response).to redirect_to(url_for(photo.image))
         end
 
         it "display error" do
-            get :download, params: { id: 108 }
+            get :show, params: { id: 108 }
 
             expect(response).to redirect_to gallery_path
             expect(flash[:alert]).to eq("You are unable to access the selected image. The owner may have delete the" \
