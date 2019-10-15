@@ -143,7 +143,7 @@ Naming/UncommunicativeMethodParamName:
   Enabled: false
 
 RSpec/MultipleExpectations:
-   Max: 5
+   Max: 10
 
 RSpec/ExampleLength:
   Max: 20

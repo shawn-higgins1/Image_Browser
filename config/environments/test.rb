@@ -50,4 +50,6 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   config.active_job.queue_adapter = :inline
+
+  config.action_controller.default_url_options = { host: "test.host" }
 end

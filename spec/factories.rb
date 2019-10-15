@@ -2,7 +2,7 @@
 
 FactoryBot.define do
     factory :photo do
-        visibility { true }
+        visibility { false }
         title { Faker.name }
         owner
 

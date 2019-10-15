@@ -32,6 +32,13 @@ RSpec.describe ResetPasswordController, type: :controller do
         end
     end
 
+    it "redirects for invalid id" do
+        post :reset_password, params: { id: 1, token: 1 }
+
+        expect(response).to redirect_to root_path
+        expect(flash[:alert]).to eq("Couldn't send the password reset email. The supplied user was invalid.")
+    end
+
     describe "GET #forgot_password" do
         it "render forgot password form" do
             get :forgot_password

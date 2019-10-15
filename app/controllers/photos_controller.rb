@@ -27,11 +27,16 @@ class PhotosController < ApplicationController
 
             # Notify the user if the save failed
             next if new_photo.save!
-            flash[:alert] = "" if flash[:alert].nil?
-            flash[:alert] += "Failed to upload a image: " + new_photo.errors.full_messages.join(', ')
+
+            flash[:alert] = "Failed to upload a image: " if flash[:alert].nil?
+            flash[:alert] += new_photo.errors.full_messages.join(', ')
 
             # Delete the image asynchrously so it doesn't fill up the storage
-            image.purge_later
+            begin
+                new_photo.image.purge_later
+            rescue ActiveSupport::MessageVerifier::InvalidSignature
+                logger.error "Failed to delete #{image} this means the image isn't attached to a record"
+            end
         end
 
         # Notify the user of a successful upload
@@ -72,7 +77,7 @@ class PhotosController < ApplicationController
                      !current_user.nil?
             # Retrieve both public and private photos
             Photo.joins(:owner).where(visibility: true).or(current_user.photos.joins(:owner))
-        elsif search_params[:visibility] == "Private"
+        elsif search_params[:visibility] == "Private" && !current_user.nil?
             # Retrieve just private photos
             Photo.joins(:owner).where(visibility: false, owner: current_user)
         else
@@ -84,7 +89,6 @@ class PhotosController < ApplicationController
         if params[:search_query].present?
             query_string = "title LIKE :search OR users.username LIKE :search"
             search_param = "%#{params[:search_query]}%"
-
             @photos = @photos.where(query_string, search: search_param)
         end
 
@@ -92,7 +96,7 @@ class PhotosController < ApplicationController
         @photos = @photos.paginate(page: params[:page]).order(created_at: :desc)
 
         # Store the search params so the search bar has the correct search fields
-        @search_params = search_params
+        @search_params = search_params.to_hash
     end
 
     # Display the photo and metadata for editing
@@ -105,8 +109,8 @@ class PhotosController < ApplicationController
             flash[:success] = "Succesfully edited the photo"
             redirect_to gallery_path
         else
-            flash[:alert] = "Failed to edit the photo"
-            redirect_to edit_photo_path(@photo)
+            flash[:alert] = "Failed to edit the photo: " + @photo.errors.full_messages.join(', ')
+            redirect_to edit_photo_path(id: @photo.id)
         end
     end
 
