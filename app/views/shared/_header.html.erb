@@ -1,43 +1,43 @@
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
     <%= link_to root_path, class: "navbar-brand", id: "logo" do %>
         <%= image_tag "logo.jpg",  width: "60", height: "60", class: "rounded" %>
-        Image Browser
+        <%= t("title") %>
     <% end %>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto navbar-right">
             <li class="nav-item <%= current_page("main", "home") %>">
-                <%= link_to "Home", home_path, class: "nav-link" %>
+                <%= link_to t("home.title"), home_path, class: "nav-link" %>
             </li>
             <li class="nav-item <%= current_page("users", "signin") %>"</li>
-                <%= link_to "Gallery", gallery_path, class: "nav-link" %>
+                <%= link_to t("gallery.title"), gallery_path, class: "nav-link" %>
             </li>
             <li class="nav-item <%= current_page("main", "help") %>"</li>
-                <%= link_to "Help", help_path, class: "nav-link" %>
+                <%= link_to t("help.title"), help_path, class: "nav-link" %>
             </li>
 
             <% if logged_in? %>
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                        Account <b class="caret"></b>
+                        <%= t("header.account") %> <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-right">
-                        <li class="dropdown-item"><%= link_to "Profile", edit_users_path %></li>
+                        <li class="dropdown-item"><%= link_to t("header.profile"), edit_users_path %></li>
                         <li class="dropdown-item">
-                            <%= link_to "Upload photos", new_photo_path %>
+                            <%= link_to t("header.upload"), new_photo_path %>
                         </li>
                         <li class="dropdown-divider"></li>
                         <li class="dropdown-item">
-                            <%= link_to "Sign out", sign_out_path, method: :delete %>
+                            <%= link_to t("header.signout"), sign_out_path, method: :delete %>
                         </li>
                     </ul>
                 </li>
             <% else %>
                 <li class="nav-item <%= current_page("users", "signin") %>"</li>
-                    <%= link_to "Sign In", signin_path, class: "nav-link" %>
+                    <%= link_to t("signin.submit"), signin_path, class: "nav-link" %>
                 </li>
                 <li class="nav-item <%= current_page("users", "new") %>"</li>
-                    <%= link_to "Sign Up", signup_path, class: "nav-link" %>
+                    <%= link_to t("header.signup"), signup_path, class: "nav-link" %>
                 </li>
             <% end %>
         </ul>

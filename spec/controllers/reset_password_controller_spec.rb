@@ -36,7 +36,6 @@ RSpec.describe ResetPasswordController, type: :controller do
         post :reset_password, params: { id: 1, token: 1 }
 
         expect(response).to redirect_to root_path
-        expect(flash[:alert]).to eq("Couldn't send the password reset email. The supplied user was invalid.")
     end
 
     describe "GET #forgot_password" do
@@ -55,8 +54,7 @@ RSpec.describe ResetPasswordController, type: :controller do
               .by(1)
 
             expect(response).to redirect_to root_path
-            expect(flash[:success]).to eq("We've sent your password reset email." \
-                                            " Check your email and follow the instructions to reset your password.")
+            expect(flash[:success]).to eq(I18n.t("reset_password.sent_email"))
         end
     end
 
@@ -78,7 +76,7 @@ RSpec.describe ResetPasswordController, type: :controller do
             post :reset_password, params: { id: user.id, token: "" }
 
             expect(response).to redirect_to root_path
-            expect(flash[:alert]).to eq("Invalid attempt to reset your password.")
+            expect(flash[:alert]).to eq(I18n.t("reset_password.failed"))
         end
 
         it "update user's password with valid token" do
@@ -92,7 +90,7 @@ RSpec.describe ResetPasswordController, type: :controller do
             expect(response).to redirect_to signin_path
             expect(updated_user&.authenticate("1234567")).to eq(updated_user)
             expect(updated_user&.authenticate("qwerty12")).to be false
-            expect(flash[:success]).to eq("Succesfully reset your password")
+            expect(flash[:success]).to eq(I18n.t("reset_password.success"))
         end
 
         it "notify user if update fails" do
@@ -110,7 +108,7 @@ RSpec.describe ResetPasswordController, type: :controller do
             expect(response).to redirect_to root_path
             expect(updated_user&.authenticate("1234567")).to be false
             expect(updated_user&.authenticate("qwerty12")).to eq(updated_user)
-            expect(flash[:alert]).to eq("Invalid attempt to reset your password.")
+            expect(flash[:alert]).to eq(I18n.t("reset_password.failed"))
         end
     end
 end

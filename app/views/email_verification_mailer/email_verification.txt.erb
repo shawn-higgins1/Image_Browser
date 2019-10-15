@@ -1,7 +1,7 @@
 
-Welcome to the ImageBrowser, <%= @user.name %>
+<%= t("email_verification.header", name: @user.username) %>
 ===============================================
- 
-To activate your account, just follow this link: <%= @url %>.
 
-Thank you for joining ImageBrowser.
+<%= t("email_verification.body") + @url %>
+
+<%= t("email_verification.footer") %>

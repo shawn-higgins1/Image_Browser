@@ -16,7 +16,7 @@ class PhotosController < ApplicationController
 
         # Check to make sure that the user uploaded at least one image
         if images.nil? || images.count.zero?
-            flash[:alert] = "You must upload at least one image"
+            flash[:alert] = I18n.t("photos.upload.at_least_one")
             return redirect_to new_photo_path
         end
 
@@ -28,7 +28,7 @@ class PhotosController < ApplicationController
             # Notify the user if the save failed
             next if new_photo.save!
 
-            flash[:alert] = "Failed to upload a image: " if flash[:alert].nil?
+            flash[:alert] = I18n.t("photos.upload.failed") if flash[:alert].nil?
             flash[:alert] += new_photo.errors.full_messages.join(', ')
 
             # Delete the image asynchrously so it doesn't fill up the storage
@@ -40,7 +40,7 @@ class PhotosController < ApplicationController
         end
 
         # Notify the user of a successful upload
-        flash[:success] = "Successfuly uploaded your photos" if flash[:alert].nil?
+        flash[:success] = I18n.t("photos.upload.success") if flash[:alert].nil?
         redirect_to gallery_path
     end
 
@@ -53,9 +53,7 @@ class PhotosController < ApplicationController
         photos = Photo.where(id: params[:ids], owner: current_user)
 
         # Notify the user if they attempted to delete someone elses photos
-        if photos.nil? || photos.count != params[:ids].count
-            flash[:alert] = "Some of the images you selected won't be delete because you didn't upload them"
-        end
+        flash[:alert] = I18n.t("photos.delete.error") if photos.nil? || photos.count != params[:ids].count
 
         # Delete all the photos. This synchronously remove all the Photo records from the db
         # so they won't show up in the gallery anymore. However, the actual image files
@@ -106,10 +104,10 @@ class PhotosController < ApplicationController
     # Update the photo
     def update
         if @photo.update(photo_params)
-            flash[:success] = "Succesfully edited the photo"
+            flash[:success] = I18n.t("photos.edit.success")
             redirect_to gallery_path
         else
-            flash[:alert] = "Failed to edit the photo: " + @photo.errors.full_messages.join(', ')
+            flash[:alert] = I18n.t("photos.edit.error") + @photo.errors.full_messages.join(', ')
             redirect_to edit_photo_path(id: @photo.id)
         end
     end
@@ -138,7 +136,7 @@ class PhotosController < ApplicationController
         @photo = Photo.find_by(id: params[:id] || params[:photo][:id])
 
         unless owner?(@photo)
-            flash[:alert] = "You are unable to edit the selected photo"
+            flash[:alert] = I18n.t("photos.ownership.error")
             redirect_to gallery_path
         end
     end
@@ -149,8 +147,7 @@ class PhotosController < ApplicationController
         @photo = Photo.lock.find_by(id: params[:id])
 
         if @photo.nil? || (!@photo.visibility && @photo.owner != current_user)
-            flash[:alert] = "You are unable to access the selected image. The owner may have delete the" \
-                            " image or made it private"
+            flash[:alert] = I18n.t("photos.access")
             return redirect_to gallery_path
         end
     end

@@ -14,8 +14,7 @@ class EmailVerificationController < ApplicationController
                                .email_verification(request.host || Rails.configuration.default_host).deliver_later
 
         # Notify the user that the email has been sent and redirect to the homepage
-        flash[:success] = "We've sent your account activation email." \
-                            " Check your email and follow the instructions to activate your account."
+        flash[:success] = I18n.t("email_verification.sent_email")
 
         redirect_to root_path
     end
@@ -26,7 +25,7 @@ class EmailVerificationController < ApplicationController
 
         # Verfiy that the specified token matches the specified users token
         if !@user.verify_token("email_verification", token)
-            flash[:alert] = "Invalid attempt to authenticate your account."
+            flash[:alert] = I18n.t("email_verification.error")
         else
             # Update that the users email has been verified
             @user.email_verification_token = nil
@@ -35,9 +34,9 @@ class EmailVerificationController < ApplicationController
             # Save the user account and signin the user
             if @user.save!
                 signin(@user)
-                flash[:success] = "Welcome to Image Browser"
+                flash[:success] = I18n.t("signin.welcome_msg")
             else
-                flash[:alert] = "Something went wrong when updating the account"
+                flash[:alert] = I18n.t("email_verification.error")
             end
         end
 

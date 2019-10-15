@@ -18,10 +18,7 @@ class SessionsController < ApplicationController
             # don't log the user in instead just notify them that they need to
             # verify their account
             if Rails.configuration.email_enabled && !user.email_verified
-                flash[:info] = "You must verify your email address before you can access ImageBrowser." \
-                                " Please check your email for the verification email or click" \
-                                " <a href=\"#{send_email_verification_path(user)}\">here</a>" \
-                                " to resend the email."
+                flash[:info] = I18n.t("sessions.email_verification_required", link: send_email_verification_path(user))
                 return redirect_to root_path
             end
 
@@ -30,7 +27,7 @@ class SessionsController < ApplicationController
             redirect_to root_path
         else
             # Notify the user that the login failed but don't tell them why
-            flash[:alert] = "Invalid email or password"
+            flash[:alert] = I18n.t("sessions.error")
             redirect_to signin_path
         end
     end

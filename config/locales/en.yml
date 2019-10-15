@@ -30,4 +30,107 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  title: Image Browser
+  signin:
+    welcome_msg: Welcome to Image Browser
+    submit: Sign in
+    forgot_password_start: "Forgot your password? Click "
+    forgot_password_end: " to reset it"
+    new_user: "New User? "
+    here: here
+  email_verification:
+    sent_email: We've sent your account activation email. Check your email and follow the instructions to activate your account.
+    error: Something went wrong when updating your account
+    subject: Image Browser Email Verification
+    header: "Welcome to the ImageBrowser, %{name}"
+    body: "To activate your account, just follow this link: "
+    footer: Thank you for joining ImageBrowser and have a great day!
+  photos:
+    upload:
+      at_least_one: You must upload at least one image
+      failed: "Failed to upload a image: "
+      success: Successfuly uploaded your photos
+    delete:
+      error: Some of the images you selected won't be deleted because you didn't upload them
+    edit:
+      success: Succesfully edited the photo
+      error: "Failed to edit the photo: "
+    ownership:
+      error: You are unable to edit the selected photo
+    access: You are unable to access the selected image. The owner may have delete the image or made it private
+  reset_password:
+    edit:
+      title: Password Reset
+      header: Reset your Password
+      submit: Reset my password
+      password_confirmation: Password Confirmation
+    sent_email: We've sent your password reset email. Check your email and follow the instructions to reset your password.
+    success: Succesfully reset your password
+    failed: Invalid attempt to reset your password.
+    subject: Image Browser Password Reset
+    header: You have requested a password reset
+    body: "To reset you password, just follow this link: "
+    footer: If you didn't request this password reset then your account may be compromised
+  sessions:
+    email_verification_required: You must verify your email address before you can access ImageBrowser. Please check your email for the verification email or click <a href="%{link}">here</a> to resend the email. 
+    error: Invalid email or password
+  users:
+    edit_own_profile: You can only edit your own profile
+    success: Successfully update your user profile
+    error: "Failed to update your user profile: "
+  help:
+    title: Help
+    body: "Image Browser allows you to upload and manage your images. Click gallery to view images
+            or sign in and click upload to upload some images of your own."
+  home:
+    title: Home
+    body: Image Browser allows you to upload and manage your images. See help for more details.
+    signup: Sign up now!
+  gallery:
+    title: Gallery
+    delete_selected: Delete selected files
+    confirm_delete: Are you sure? This action can't be undone.
+    delete: Delete
+    edit_btn: Edit
+    download: Download
+    visibility: "Visibility: "
+    username: "Uploaded by: "
+    time: "Uploaded at: "
+    search: Search
+    any: Any
+    public: Public
+    private: Private
+    new:
+      title: Upload photos
+      header: Upload some new photos
+      submit: Upload your Photos
+    upload:
+      title: Photo title (All uploaded photos will have this title)
+      visibility: Share these images publically?
+      photos: Photos
+    edit:
+      title: Edit photos
+      header: Edit your photo
+      submit: Update your Photo
+  footer:
+    powered_by: Powered by Image Browser 1.0
+  header:
+    signup: Sign up
+    signout: Sign out
+    upload: Upload new Photos
+    account: Account
+    profile: Profile
+  user:
+    new:
+      password_confirmation: Password Confirmation
+      signup: Sign Up
+      create: Create my account
+    profile:
+      title: User Profile
+      header: Edit your user profile
+      submit: Update my Profile
+      delete: Delete all your uploaded files
+      forgot_start: "Click "
+      forgot_end: " to reset your password"
+      
+

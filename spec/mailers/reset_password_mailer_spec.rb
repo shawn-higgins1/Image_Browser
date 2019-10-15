@@ -8,7 +8,7 @@ RSpec.describe ResetPasswordMailer, type: :mailer do
         let(:mail) { described_class.with(user: user).reset_password('http://localhost:3000') }
 
         it "creates email" do
-            expect(mail.subject).to eq("Image Browser Password Reset")
+            expect(mail.subject).to eq(I18n.t("reset_password.subject"))
             expect(mail.to).to eq([user.email])
             expect(mail.from).to eq(["from@example.com"])
         end

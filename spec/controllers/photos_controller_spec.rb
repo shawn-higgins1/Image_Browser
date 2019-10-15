@@ -28,7 +28,7 @@ RSpec.describe PhotosController, type: :controller do
             post :upload, params: { photo: { images: [], title: "test" } }
 
             expect(response).to redirect_to new_photo_path
-            expect(flash[:alert]).to eq("You must upload at least one image")
+            expect(flash[:alert]).to eq(I18n.t("photos.upload.at_least_one"))
         end
 
         it "upload images" do
@@ -48,7 +48,7 @@ RSpec.describe PhotosController, type: :controller do
             expect(@user.photos.count).to eq(5)
             expect(@user.photos.first.visibility).to be true
             expect(@user.photos.first.title).to eq("test")
-            expect(flash[:success]).to eq("Successfuly uploaded your photos")
+            expect(flash[:success]).to eq(I18n.t("photos.upload.success"))
             expect(response).to redirect_to gallery_path
         end
 
@@ -78,7 +78,7 @@ RSpec.describe PhotosController, type: :controller do
             @user.reload
 
             expect(@user.photos.count).to eq(0)
-            expect(flash[:alert]).to eq("Failed to upload a image: ")
+            expect(flash[:alert]).to eq(I18n.t("photos.upload.failed"))
             expect(response).to redirect_to gallery_path
         end
     end
@@ -113,8 +113,7 @@ RSpec.describe PhotosController, type: :controller do
             end.to change(ActiveStorage::Attachment, :count).by(-1)
 
             expect(@user.photos.count).to eq(0)
-            expect(flash[:alert]).to eq("Some of the images you selected won't be delete" \
-                                        " because you didn't upload them")
+            expect(flash[:alert]).to eq(I18n.t("photos.delete.error"))
             expect(response).to redirect_to gallery_path
         end
     end
@@ -220,7 +219,7 @@ RSpec.describe PhotosController, type: :controller do
             get :edit, params: { id: photo.id }
 
             expect(response).to redirect_to gallery_path
-            expect(flash[:alert]).to eq("You are unable to edit the selected photo")
+            expect(flash[:alert]).to eq(I18n.t("photos.ownership.error"))
         end
 
         it "render edit if the current user owns the photo" do
@@ -245,7 +244,7 @@ RSpec.describe PhotosController, type: :controller do
             photo.reload
 
             expect(response).to redirect_to gallery_path
-            expect(flash[:success]).to eq("Succesfully edited the photo")
+            expect(flash[:success]).to eq(I18n.t("photos.edit.success"))
             expect(photo.title).to eq("test1")
             expect(photo.visibility).to be true
         end
@@ -262,7 +261,7 @@ RSpec.describe PhotosController, type: :controller do
             photo.reload
 
             expect(response).to redirect_to edit_photo_path(id: photo.id)
-            expect(flash[:alert]).to eq("Failed to edit the photo: ")
+            expect(flash[:alert]).to eq(I18n.t("photos.edit.error"))
             expect(photo.title).to eq("Test")
             expect(photo.visibility).to be false
         end
@@ -292,8 +291,7 @@ RSpec.describe PhotosController, type: :controller do
             get :download, params: { id: photo.id }
 
             expect(response).to redirect_to gallery_path
-            expect(flash[:alert]).to eq("You are unable to access the selected image. The owner may have delete the" \
-                                        " image or made it private")
+            expect(flash[:alert]).to eq(I18n.t("photos.access"))
         end
     end
 
@@ -311,8 +309,7 @@ RSpec.describe PhotosController, type: :controller do
             get :show, params: { id: 108 }
 
             expect(response).to redirect_to gallery_path
-            expect(flash[:alert]).to eq("You are unable to access the selected image. The owner may have delete the" \
-                                        " image or made it private")
+            expect(flash[:alert]).to eq(I18n.t("photos.access"))
         end
     end
 

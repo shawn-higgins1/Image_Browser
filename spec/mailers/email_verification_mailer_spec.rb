@@ -8,7 +8,7 @@ RSpec.describe EmailVerificationMailer, type: :mailer do
         let(:mail) { described_class.with(user: user).email_verification('http://localhost:3000') }
 
         it "creates email" do
-            expect(mail.subject).to eq("Image Browser Email Verification")
+            expect(mail.subject).to eq(I18n.t("email_verification.subject"))
             expect(mail.to).to eq([user.email])
             expect(mail.from).to eq(["from@example.com"])
         end

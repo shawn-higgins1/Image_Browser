@@ -1,12 +1,10 @@
-<% provide(:title, "Home") %>
+<% provide(:title, t("home.title")) %>
 <div class="center jumbotron">
-    <h1>Welcome to Image Browser</h1>
+    <h1><%= t("signin.welcome_msg") %></h1>
 
-    <h2>
-        Image Browser allows you to upload and manage your images. See help for more details.
-    </h2>
+    <h2><%= t("home.body") %></h2>
 
     <% unless logged_in? %>
-        <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
+        <%= link_to t("home.signup"), signup_path, class: "btn btn-lg btn-primary" %>
     <% end %>
 </div>

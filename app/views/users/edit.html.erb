@@ -1,5 +1,5 @@
-<% provide(:title, 'User Profile') %>
-<h1>Edit your User Profile</h1>
+<% provide(:title, t("user.profile.title")) %>
+<h1><%= t("user.profile.header") %></h1>
 
 <div class="row justify-content-center">
     <div class="col-md-6 col-md-offset-3">
@@ -11,11 +11,11 @@
                 <%= f.label :email, class: "form-label" %>
                 <%= f.email_field :email, class: 'form-control', readonly: true %>
             </div>
-            <%= f.submit "Update my Profile", class: "btn btn-primary mt-2" %>
+            <%= f.submit t("user.profile.submit"), class: "btn btn-primary mt-2" %>
         <% end %>
 
-        <p>Click <%= link_to "here", forgot_password_path(id: @user.id), method: :post %> to reset your password </p>
+        <p><%= t("user.profile.forgot_start") %> <%= link_to t("sigiin.here"), forgot_password_path(id: @user.id), method: :post %> <%= t("user.profile.forgot_end") %> </p>
 
-        <%= link_to "Delete all your uploaded files", delete_photos_path(ids: @user.photos.pluck(:id)), id: "delete-selected", method: :delete, class: "btn btn-danger", data: {confirm: "Are you sure? This action can't be undone."} %>
+        <%= link_to t("user.profile.delete"), delete_photos_path(ids: @user.photos.pluck(:id)), id: "delete-selected", method: :delete, class: "btn btn-danger", data: {confirm: t("gallery.confirm_delete")} %>
     </div>
 </div>

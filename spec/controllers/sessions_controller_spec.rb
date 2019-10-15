@@ -24,7 +24,7 @@ RSpec.describe SessionsController, type: :controller do
             post :create, params: { session: { email: "test@example.com" } }
 
             expect(response).to redirect_to signin_path
-            expect(flash[:alert]).to eq("Invalid email or password")
+            expect(flash[:alert]).to eq(I18n.t("sessions.error"))
         end
 
         it "reject if the password is invalid" do
@@ -32,7 +32,7 @@ RSpec.describe SessionsController, type: :controller do
             post :create, params: { session: { email: user.email, password: "" } }
 
             expect(response).to redirect_to signin_path
-            expect(flash[:alert]).to eq("Invalid email or password")
+            expect(flash[:alert]).to eq(I18n.t("sessions.error"))
         end
 
         it "notify the user if they haven't verified their email" do
@@ -41,10 +41,8 @@ RSpec.describe SessionsController, type: :controller do
             post :create, params: { session: { email: user.email, password: "1234567" } }
 
             expect(response).to redirect_to root_path
-            expect(flash[:info]).to  eq("You must verify your email address before you can access ImageBrowser." \
-                                        " Please check your email for the verification email or click" \
-                                        " <a href=\"#{send_email_verification_path(user)}\">here</a>" \
-                                        " to resend the email.")
+            expect(flash[:info]).to eq(I18n.t("sessions.email_verification_required",
+                                                link: send_email_verification_path(user)))
         end
 
         it "signin the user" do

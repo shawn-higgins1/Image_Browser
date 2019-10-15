@@ -12,12 +12,12 @@
                 <%= f.password_field :password, class: 'form-control', required: true %>
             </div>
 
-            <%= f.submit "Log in", class: "btn btn-primary mt-2" %>
+            <%= f.submit t("signin.submit"), class: "btn btn-primary mt-2" %>
         <% end %>
 
         <% if Rails.configuration.email_enabled %>
-            <p> Forgot your password? Click <%= link_to "here", forgot_password_form_path %> to reset it</p>
+            <p> <%= t("signin.forgot_password_start") %> <%= link_to t("signin.here"), forgot_password_form_path %> <%= t("signin.forgot_password_end") %> </p>
         <% end %>
-        <p>New user? <%= link_to "Sign up now!", signup_path %></p>
+        <p><%= t("signin.new_user") %> <%= link_to t("home.signup"), signup_path %></p>
     </div>
 </div>

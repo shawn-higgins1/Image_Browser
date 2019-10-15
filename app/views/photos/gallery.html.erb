@@ -1,23 +1,23 @@
-<% provide(:title, 'Gallery') %>
+<% provide(:title, t("gallery.title")) %>
 
 <nav class="navbar navbar-expand-sm navbar-light bg-light">
     <div class="navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <% if current_user %>
                 <li class="nav-item">
-                    <%= link_to "Delete selected files", delete_photos_path, id: "delete-selected", method: :delete, class: "btn btn-danger", data: {confirm: "Are you sure? This action can't be undone"} %>
+                    <%= link_to t("gallery.delete_selected"), delete_photos_path, id: "delete-selected", method: :delete, class: "btn btn-danger", data: {confirm: t("gallery.confirm_delete")} %>
                 </li>
             <% end %>
         </ul>
         <%= form_with url: search_photos_path, method: :post, class: "form-inline my-2 my-lg-0" do |f| %>
             <% if current_user %>
                 <div class="form-group pr-1">
-                    <%= f.label :visibility, "Visibility: ", class: "form-label pr-1" %>
-                    <%= f.select :visibility, options_for_select([["Any", "Any"], ["Public", "Public"], ["Private", "Private"]], @search_params[:visibility]), {}, { class: "form-control pl-1" } %>
+                    <%= f.label :visibility, t("gallery.visibility"), class: "form-label pr-1" %>
+                    <%= f.select :visibility, options_for_select([[t("gallery.any"), "Any"], [t("gallery.public"), "Public"], [t("gallery.private"), "Private"]], @search_params[:visibility]), {}, { class: "form-control pl-1" } %>
                 </div>
             <% end %>
             <%= f.text_field :search_query, value: @search_params[:search_query], class: "form-control mr-sm-2" %>
-            <%= f.button "Search", type: "submit", class: "btn btn-outline-success my-2 my-sm-0" %>
+            <%= f.button t("gallery.search"), type: "submit", class: "btn btn-outline-success my-2 my-sm-0" %>
         <% end %>
     </div>
 </nav>
@@ -31,18 +31,18 @@
                     <%= image_tag photo.image, class: "img-fluid" %>
                 <% end %>
                 <div>
-                    <p>Uploaded by: <%= photo.owner.username %></p>
-                    <p>Uploaded at: <%= photo.created_at.localtime.strftime("%d/%m/%Y %l:%M %P") %>
+                    <p><%= t("gallery.username") + photo.owner.username %></p>
+                    <p><%= t("gallery.time") + photo.created_at.localtime.strftime("%d/%m/%Y %l:%M %P") %>
                     <% if owner?(photo) %>
-                        <p>Visibility: <%= photo.visibility ? "Public" : "Private" %></p>
+                        <p><%= t("gallery.visibility") + (photo.visibility ? "Public" : "Private") %></p>
                     <% end %>
                     <div class="text-right">
                         <% if owner?(photo) %>
-                            <%= link_to "Edit", edit_photo_path(photo), class: "btn btn-primary" %>
+                            <%= link_to t("gallery.edit_btn"), edit_photo_path(photo), class: "btn btn-primary" %>
                         <% end %>
-                        <%= link_to "Download", download_photo_path(photo), class: "btn btn-primary" %>
+                        <%= link_to t("gallery.download"), download_photo_path(photo), class: "btn btn-primary" %>
                         <% if owner?(photo) %>
-                            <%= link_to "Delete", delete_photos_path(ids: [photo.id]), method: :delete, class: "btn btn-danger", data: {confirm: "Are you sure? This action can't be undone"} %>
+                            <%= link_to t("gallery.delete"), delete_photos_path(ids: [photo.id]), method: :delete, class: "btn btn-danger", data: {confirm: t("gallery.confirm_delete")} %>
                         <% end %>
                     </div>
                 </div>

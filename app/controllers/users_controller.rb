@@ -24,7 +24,7 @@ class UsersController < ApplicationController
 
             # Sign in notify the user
             signin(@user)
-            flash[:success] = "Welcome to Image Browser"
+            flash[:success] = I18n.t("signin.welcome_msg")
             redirect_to root_path
         else
             # Display the errors with the account creatation for the user
@@ -47,15 +47,15 @@ class UsersController < ApplicationController
     # Update the user
     def update
         if @user != current_user
-            flash[:alert] = "You can only edit your own profile"
+            flash[:alert] = I18n.t("users.edit_own_profile")
             return redirect_to root_path
         end
 
         # Only allow the user to update their username
         if @user.update(user_params.permit(:username))
-            flash[:success] = "Successfully update your user profile"
+            flash[:success] = I18n.t("users.success")
         else
-            flash[:alert] = "Failed to update your user profile: " + @user.errors.full_messages.join(', ')
+            flash[:alert] = I18n.t("users.error") + @user.errors.full_messages.join(', ')
         end
 
         # Redirect the user to their update profile

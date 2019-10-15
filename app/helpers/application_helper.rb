@@ -3,7 +3,7 @@
 module ApplicationHelper
     # Set the page title
     def get_title(page_title = '')
-        base_title = "Image Browser"
+        base_title = I18n.t("title")
         if page_title.empty?
             base_title
         else

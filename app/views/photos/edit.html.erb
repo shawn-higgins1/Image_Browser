@@ -1,4 +1,4 @@
-<% provide(:title, 'Edit photos') %>
-<h1>Edit your photo</h1>
+<% provide(:title, t("gallery.edit.title")) %>
+<h1><%= t("gallery.edit.header") %></h1>
 
-<%= render "photos/shared/photo_form", photo: @photo, submit_url: update_photo_path, upload_images: false, submit_msg: "Update your Photo", submit_method: :patch %>
+<%= render "photos/shared/photo_form", photo: @photo, submit_url: update_photo_path, upload_images: false, submit_msg: t("gallery.edit.submit"), submit_method: :patch %>

@@ -1,4 +1,4 @@
-<% provide(:title, 'Upload photos') %>
-<h1>Upload some new photos</h1>
+<% provide(:title, t("gallery.new.title")) %>
+<h1><%= t("gallery.new.header") %></h1>
 
-<%= render "photos/shared/photo_form", photo: @photo, submit_url: upload_photos_path, upload_images: true, submit_msg: "Upload your Photos", submit_method: :post %>
+<%= render "photos/shared/photo_form", photo: @photo, submit_url: upload_photos_path, upload_images: true, submit_msg: t("gallery.new.submit"), submit_method: :post %>

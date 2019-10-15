@@ -15,8 +15,7 @@ class ResetPasswordController < ApplicationController
                            .reset_password(request.host || Rails.configuration.default_host).deliver_later
 
         # Notify the user that the email was sent
-        flash[:success] = "We've sent your password reset email." \
-                            " Check your email and follow the instructions to reset your password."
+        flash[:success] = I18n.t("reset_password.sent_email")
 
         redirect_to root_path
     end
@@ -33,10 +32,10 @@ class ResetPasswordController < ApplicationController
         # If the token is valid update the users password
         if @user.verify_token("reset_password", token) &&
            @user.update(params.require(:user).permit(:password, :password_confirmation))
-                flash[:success] = "Succesfully reset your password"
+                flash[:success] = I18n.t("reset_password.success")
                 redirect_to signin_path
         else
-            flash[:alert] = "Invalid attempt to reset your password."
+            flash[:alert] = I18n.t("reset_password.failed")
             redirect_to root_path
         end
     end
@@ -47,9 +46,6 @@ class ResetPasswordController < ApplicationController
     def verify_user
         @user = User.find_by(id: params[:id]) || User.find_by(email: params[:email])
 
-        if @user.nil?
-            flash[:alert] = "Couldn't send the password reset email. The supplied user was invalid."
-            return redirect_to root_path
-        end
+        return redirect_to root_path if @user.nil?
     end
 end

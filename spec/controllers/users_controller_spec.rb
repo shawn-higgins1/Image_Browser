@@ -79,7 +79,7 @@ RSpec.describe UsersController, type: :controller do
             expect(@request.session[:user_id]).to eq(user.id)
             # rubocop:enable RSpec/InstanceVariable
             expect(response).to redirect_to root_path
-            expect(flash[:success]).to eq("Welcome to Image Browser")
+            expect(flash[:success]).to eq(I18n.t("signin.welcome_msg"))
         end
     end
 
@@ -107,7 +107,7 @@ RSpec.describe UsersController, type: :controller do
             post :update, params: { id: create(:user).id, user: {} }
 
             expect(response).to redirect_to root_path
-            expect(flash[:alert]).to eq("You can only edit your own profile")
+            expect(flash[:alert]).to eq(I18n.t("users.edit_own_profile"))
         end
 
         it "can't edit a profile if you aren't signed in" do
@@ -126,7 +126,7 @@ RSpec.describe UsersController, type: :controller do
             expect(response).to redirect_to edit_users_path
             expect(updated_user.email).to eq(user.email)
             expect(updated_user.username).to eq("shawn")
-            expect(flash[:success]).to eq("Successfully update your user profile")
+            expect(flash[:success]).to eq(I18n.t("users.success"))
         end
 
         it "fails to update the user" do
@@ -139,7 +139,7 @@ RSpec.describe UsersController, type: :controller do
             expect(response).to redirect_to edit_users_path
             expect(updated_user.email).to eq(user.email)
             expect(updated_user.username).to eq(user.username)
-            expect(flash[:alert]).to eq("Failed to update your user profile: Username can't be blank")
+            expect(flash[:alert]).to eq(I18n.t("users.error") + "Username can't be blank")
         end
     end
 end

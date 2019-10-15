@@ -33,8 +33,7 @@ RSpec.describe EmailVerificationController, type: :controller do
 
             expect { get :send_email, params: { id: user.id } }.to change { ActionMailer::Base.deliveries.count }.by(1)
             expect(response).to redirect_to root_path
-            expect(flash[:success]).to eq("We've sent your account activation email." \
-                                            " Check your email and follow the instructions to activate your account.")
+            expect(flash[:success]).to eq(I18n.t("email_verification.sent_email"))
         end
     end
 
@@ -46,7 +45,7 @@ RSpec.describe EmailVerificationController, type: :controller do
             get :verify_account, params: { id: user.id, token: "" }
 
             expect(response).to redirect_to root_path
-            expect(flash[:alert]).to eq("Invalid attempt to authenticate your account.")
+            expect(flash[:alert]).to eq(I18n.t("email_verification.error"))
         end
 
         it "update user with valid token" do
@@ -59,7 +58,7 @@ RSpec.describe EmailVerificationController, type: :controller do
             expect(response).to redirect_to root_path
             expect(updated_user.email_verified).to be true
             expect(updated_user.email_verification_token).to be_nil
-            expect(flash[:success]).to eq("Welcome to Image Browser")
+            expect(flash[:success]).to eq(I18n.t("signin.welcome_msg"))
         end
 
         it "notify user if save fails" do
@@ -76,7 +75,7 @@ RSpec.describe EmailVerificationController, type: :controller do
             expect(response).to redirect_to root_path
             expect(updated_user.email_verified).to be false
             expect(updated_user.email_verification_token).not_to be_nil
-            expect(flash[:alert]).to eq("Something went wrong when updating the account")
+            expect(flash[:alert]).to eq(I18n.t("email_verification.error"))
         end
     end
 end

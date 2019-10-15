@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe ApplicationHelper, type: :helper do
     describe "#get_title" do
         it "returns base title if none is specified" do
-            expect(helper.get_title).to eql("Image Browser")
+            expect(helper.get_title).to eql(I18n.t("title"))
         end
 
         it "returns appended title if one is specified" do
