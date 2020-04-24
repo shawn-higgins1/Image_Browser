@@ -4,7 +4,6 @@
 
 [![Build Status](https://travis-ci.com/shawn-higgins1/Image_Browser.svg?branch=master)](https://travis-ci.com/shawn-higgins1/Image_Browser)
 
-This is my solution for the Fall 2019 Shopify Coding Challenge
 This application serves as an image repository that allows users to upload
 and manage their images.
 
