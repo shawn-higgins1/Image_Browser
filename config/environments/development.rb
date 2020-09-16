@@ -2,7 +2,6 @@
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-  config.email_enabled = false
 
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
@@ -17,7 +16,7 @@ Rails.application.configure do
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
-  if Rails.root.join('tmp', 'caching-dev.txt').exist?
+  if Rails.root.join('tmp/caching-dev.txt').exist?
     config.action_controller.perform_caching = true
     config.action_controller.enable_fragment_cache_logging = true
 

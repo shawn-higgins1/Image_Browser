@@ -30,7 +30,7 @@ class UsersController < ApplicationController
             # Display the errors with the account creatation for the user
             flash[:alert] = "<ul>"
             @user.errors.full_messages.each do |msg|
-                flash[:alert] += "<li>" + msg + "</li>"
+                flash[:alert] += "<li>#{msg}</li>"
             end
 
             flash[:alert] += "</ul>"

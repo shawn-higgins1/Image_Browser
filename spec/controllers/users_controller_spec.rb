@@ -7,9 +7,9 @@ def random_valid_user_params
     {
       user: {
         username: Faker::Internet.user_name,
-          email: Faker::Internet.email,
-          password: pass,
-          password_confirmation: pass
+        email: Faker::Internet.email,
+        password: pass,
+        password_confirmation: pass
       },
     }
 end
@@ -19,9 +19,9 @@ RSpec.describe UsersController, type: :controller do
         {
           user: {
             usernname: "Invalid",
-              email: "example.com",
-              password: "pass",
-              password_confirmation: "invalid"
+            email: "example.com",
+            password: "pass",
+            password_confirmation: "invalid"
           },
         }
     end
@@ -139,7 +139,7 @@ RSpec.describe UsersController, type: :controller do
             expect(response).to redirect_to edit_users_path
             expect(updated_user.email).to eq(user.email)
             expect(updated_user.username).to eq(user.username)
-            expect(flash[:alert]).to eq(I18n.t("users.error") + "Username can't be blank")
+            expect(flash[:alert]).to eq("#{I18n.t('users.error')}Username can't be blank")
         end
     end
 end

@@ -23,7 +23,7 @@ class PhotosController < ApplicationController
         # Create a new photo model for each uploade image
         images.each do |image|
             new_photo = Photo.new(owner: @current_user, visibility: photo_params[:visibility],
-                                    title: photo_params[:title], image: image)
+                                  title: photo_params[:title], image: image)
 
             # Notify the user if the save failed
             next if new_photo.save!
@@ -148,7 +148,7 @@ class PhotosController < ApplicationController
 
         if @photo.nil? || (!@photo.visibility && @photo.owner != current_user)
             flash[:alert] = I18n.t("photos.access")
-            return redirect_to gallery_path
+            redirect_to gallery_path
         end
     end
 

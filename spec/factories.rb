@@ -7,8 +7,8 @@ FactoryBot.define do
         owner
 
         after(:build) do |photo|
-            photo.image.attach(io: File.open(Rails.root.join('spec', 'support', 'images', 'doggo.jpg')),
-                                            filename: 'doggo.jpg', content_type: 'image/jpg')
+            photo.image.attach(io: File.open(Rails.root.join('spec/support/images/doggo.jpg')),
+                               filename: 'doggo.jpg', content_type: 'image/jpg')
         end
     end
 
