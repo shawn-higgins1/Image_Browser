@@ -32,15 +32,15 @@ RSpec.describe PhotosController, type: :controller do
         end
 
         it "upload images" do
-            file1 = fixture_file_upload(Rails.root.join('spec', 'support', 'images', 'doggo.jpg'), 'image/jpg')
-            file2 = fixture_file_upload(Rails.root.join('spec', 'support', 'images', 'doggo.jpg'), 'image/jpg')
-            file3 = fixture_file_upload(Rails.root.join('spec', 'support', 'images', 'doggo.jpg'), 'image/jpg')
-            file4 = fixture_file_upload(Rails.root.join('spec', 'support', 'images', 'doggo.jpg'), 'image/jpg')
-            file5 = fixture_file_upload(Rails.root.join('spec', 'support', 'images', 'doggo.jpg'), 'image/jpg')
+            file1 = fixture_file_upload(Rails.root.join('spec/support/images/doggo.jpg'), 'image/jpg')
+            file2 = fixture_file_upload(Rails.root.join('spec/support/images/doggo.jpg'), 'image/jpg')
+            file3 = fixture_file_upload(Rails.root.join('spec/support/images/doggo.jpg'), 'image/jpg')
+            file4 = fixture_file_upload(Rails.root.join('spec/support/images/doggo.jpg'), 'image/jpg')
+            file5 = fixture_file_upload(Rails.root.join('spec/support/images/doggo.jpg'), 'image/jpg')
 
             expect do
                 post :upload, params: { photo: { images: [file1, file2, file3, file4, file5],
-                                                visibility: true, title: "test" } }
+                                                 visibility: true, title: "test" } }
             end.to change(ActiveStorage::Attachment, :count).by(5)
 
             @user.reload
@@ -53,8 +53,8 @@ RSpec.describe PhotosController, type: :controller do
         end
 
         it "upload images with some failures" do
-            file1 = fixture_file_upload(Rails.root.join('spec', 'support', 'images', 'doggo.jpg'), 'image/jpg')
-            file2 = fixture_file_upload(Rails.root.join('spec', 'support', 'images', 'doggo.jpg'), 'image/jpg')
+            file1 = fixture_file_upload(Rails.root.join('spec/support/images/doggo.jpg'), 'image/jpg')
+            file2 = fixture_file_upload(Rails.root.join('spec/support/images/doggo.jpg'), 'image/jpg')
 
             tmp = Photo.new(image: file1, owner: create(:user))
             tmp.save!
@@ -72,7 +72,7 @@ RSpec.describe PhotosController, type: :controller do
 
             expect do
                 post :upload, params: { photo: { images: [upload_file1, upload_file2],
-                                                visibility: false, title: "test2" } }
+                                                 visibility: false, title: "test2" } }
             end.to change(ActiveStorage::Attachment, :count).by(0)
 
             @user.reload
@@ -95,8 +95,8 @@ RSpec.describe PhotosController, type: :controller do
         end
 
         it "delete if no specified ids" do
-            file1 = fixture_file_upload(Rails.root.join('spec', 'support', 'images', 'doggo.jpg'), 'image/jpg')
-            file2 = fixture_file_upload(Rails.root.join('spec', 'support', 'images', 'doggo.jpg'), 'image/jpg')
+            file1 = fixture_file_upload(Rails.root.join('spec/support/images/doggo.jpg'), 'image/jpg')
+            file2 = fixture_file_upload(Rails.root.join('spec/support/images/doggo.jpg'), 'image/jpg')
 
             tmp = Photo.new(image: file1, owner: @user)
             tmp.save!

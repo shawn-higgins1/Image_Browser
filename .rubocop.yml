@@ -10,7 +10,8 @@ AllCops:
   - 'node_modules/**/*'
   - 'bin/bundle'
   DisabledByDefault: false
-  TargetRubyVersion: 2.5
+  TargetRubyVersion: 2.6
+  NewCops: enable
 
 # Gems within groups in the Gemfile should be alphabetically sorted.
 Bundler/OrderedGems:
@@ -76,14 +77,6 @@ Style/MutableConstant:
 Style/RescueStandardError:
   Enabled: false
 
-# Align the elements of a hash literal if they span more than one line.
-Layout/AlignHash:
-  Enabled: false
-
-# Align the parameters of a method definition if they span more than one line.
-Layout/AlignParameters:
-  Enabled: false
-
 # Align ends corresponding to defs correctly.
 Layout/EndAlignment:
   Enabled: false
@@ -97,7 +90,7 @@ Layout/EmptyLineAfterGuardClause:
   Enabled: false
 
 # Align the arguments of a method call if they span more than one line.
-Layout/AlignArguments:
+Layout/ArgumentAlignment:
   Enabled: false
 
 #
@@ -137,10 +130,6 @@ Metrics/AbcSize:
 # of test cases needed to validate a method.
 Metrics/CyclomaticComplexity:
   Max: 17
-
-# Checks for method parameter names that contain capital letters, end in numbers, or do not meet a minimal length.
-Naming/UncommunicativeMethodParamName:
-  Enabled: false
 
 RSpec/MultipleExpectations:
    Max: 10

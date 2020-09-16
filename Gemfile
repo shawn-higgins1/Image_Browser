@@ -3,10 +3,10 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.3'
+ruby '2.6.5'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.0.0'
+gem 'rails', '~> 6.0.3'
 # Use pg as the database for Active Record
 gem 'pg', '~> 1.1.4'
 # Use Puma as the app server
@@ -44,7 +44,7 @@ group :development, :test do
     gem 'rubocop-rspec', require: false
     gem 'dotenv-rails'
 
-    gem 'rspec-rails', '~> 4.0.0.beta2'
+    gem 'rspec-rails'
     gem 'rails-controller-testing'
     gem 'coveralls', require: false
     gem 'simplecov', require: false
