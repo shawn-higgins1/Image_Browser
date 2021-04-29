@@ -12,7 +12,7 @@ class ResetPasswordController < ApplicationController
     def send_email
         # Send the email
         ResetPasswordMailer.with(user: @user)
-                           .reset_password(request.host || Rails.configuration.default_host).deliver_later
+                           .reset_password.deliver_later
 
         # Notify the user that the email was sent
         flash[:success] = I18n.t("reset_password.sent_email")

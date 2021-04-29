@@ -11,7 +11,7 @@ class EmailVerificationController < ApplicationController
 
         # Send the email
         EmailVerificationMailer.with(user: @user)
-                               .email_verification(request.host || Rails.configuration.default_host).deliver_later
+                               .email_verification.deliver_later
 
         # Notify the user that the email has been sent and redirect to the homepage
         flash[:success] = I18n.t("email_verification.sent_email")
