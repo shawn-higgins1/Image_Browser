@@ -24,9 +24,7 @@ class EmailVerificationController < ApplicationController
         token = params[:token]
 
         # Verfiy that the specified token matches the specified users token
-        if !@user.verify_token("email_verification", token)
-            flash[:alert] = I18n.t("email_verification.error")
-        else
+        if @user.verify_token("email_verification", token)
             # Update that the users email has been verified
             @user.email_verification_token = nil
             @user.email_verified = true
@@ -38,6 +36,8 @@ class EmailVerificationController < ApplicationController
             else
                 flash[:alert] = I18n.t("email_verification.error")
             end
+        else
+            flash[:alert] = I18n.t("email_verification.error")
         end
 
         redirect_to root_path

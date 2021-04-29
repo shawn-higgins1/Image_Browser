@@ -16,14 +16,13 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
-require 'simplecov'
-require 'coveralls'
+require "simplecov"
+require "coveralls"
 
-SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
-                                                                 SimpleCov::Formatter::HTMLFormatter,
-                                                                 Coveralls::SimpleCov::Formatter
-                                                               ])
-
+SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
+  SimpleCov::Formatter::HTMLFormatter,
+  Coveralls::SimpleCov::Formatter
+]
 SimpleCov.start
 
 require 'faker'
@@ -72,7 +71,7 @@ RSpec.configure do |config|
   #   # Allows RSpec to persist some state between runs in order to support
   #   # the `--only-failures` and `--next-failure` CLI options. We recommend
   #   # you configure your source control system to ignore this file.
-  #   config.example_status_persistence_file_path = "spec/examples.txt"
+  config.example_status_persistence_file_path = "spec/history.txt"
   #
   #   # Limits the available syntax to the non-monkey patched syntax that is
   #   # recommended. For more details, see:

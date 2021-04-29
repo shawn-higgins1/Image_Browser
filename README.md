@@ -1,6 +1,6 @@
 # README
 
-[![Coverage Status](https://coveralls.io/repos/github/shawn-higgins1/Shopify-fall2019-code-challenge/badge.svg?branch=master)](https://coveralls.io/github/shawn-higgins1/Shopify-fall2019-code-challenge?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/shawn-higgins1/Image_Browser/badge.svg?branch=master)](https://coveralls.io/github/shawn-higgins1/Image_Browser?branch=master)
 
 [![Build Status](https://travis-ci.com/shawn-higgins1/Image_Browser.svg?branch=master)](https://travis-ci.com/shawn-higgins1/Image_Browser)
 

@@ -54,24 +54,13 @@ RSpec.describe PhotosController, type: :controller do
 
         it "upload images with some failures" do
             file1 = fixture_file_upload(Rails.root.join('spec/support/images/doggo.jpg'), 'image/jpg')
-            file2 = fixture_file_upload(Rails.root.join('spec/support/images/doggo.jpg'), 'image/jpg')
-
-            tmp = Photo.new(image: file1, owner: create(:user))
-            tmp.save!
-
-            upload_file1 = tmp.image.blob.key
-
-            tmp = Photo.new(image: file2, owner: create(:user))
-            tmp.save!
-
-            upload_file2 = tmp.image.blob.key
 
             # rubocop:disable RSpec/AnyInstance
             allow_any_instance_of(Photo).to receive(:save!).and_return(false)
             # rubocop:enable RSpec/AnyInstance
 
             expect do
-                post :upload, params: { photo: { images: [upload_file1, upload_file2],
+                post :upload, params: { photo: { images: [file1],
                                                  visibility: false, title: "test2" } }
             end.to change(ActiveStorage::Attachment, :count).by(0)
 

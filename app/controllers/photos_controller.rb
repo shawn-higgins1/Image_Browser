@@ -30,13 +30,6 @@ class PhotosController < ApplicationController
 
             flash[:alert] = I18n.t("photos.upload.failed") if flash[:alert].nil?
             flash[:alert] += new_photo.errors.full_messages.join(', ')
-
-            # Delete the image asynchrously so it doesn't fill up the storage
-            begin
-                new_photo.image.purge_later
-            rescue ActiveSupport::MessageVerifier::InvalidSignature
-                logger.error "Failed to delete #{image} this means the image isn't attached to a record"
-            end
         end
 
         # Notify the user of a successful upload

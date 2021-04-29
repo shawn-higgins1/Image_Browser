@@ -114,7 +114,7 @@ Metrics/ClassLength:
   Enabled: false
 
 # Limit lines to 80 characters.
-Metrics/LineLength:
+Layout/LineLength:
   Max: 120
 
 # Avoid methods longer than 10 lines of code.

@@ -2,7 +2,7 @@ sudo: required
 language: ruby
 cache: bundler
 rvm:
-- 2.6.5
+- 3.0.1
 jobs:
   include:
   - stage: test
