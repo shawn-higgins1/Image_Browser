@@ -32,7 +32,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 
 gem "aws-sdk-s3"
 
-gem 'will_paginate', '~> 3.1.1'
+gem 'will_paginate', '~> 3.3.0'
 gem 'bootstrap-will_paginate'
 
 group :development, :test do
