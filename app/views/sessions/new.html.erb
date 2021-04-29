@@ -15,9 +15,7 @@
             <%= f.submit t("signin.submit"), class: "btn btn-primary mt-2" %>
         <% end %>
 
-        <% if Rails.configuration.email_enabled %>
-            <p> <%= t("signin.forgot_password_start") %> <%= link_to t("signin.here"), forgot_password_form_path %> <%= t("signin.forgot_password_end") %> </p>
-        <% end %>
+        <p> <%= t("signin.forgot_password_start") %> <%= link_to t("signin.here"), forgot_password_form_path %> <%= t("signin.forgot_password_end") %> </p>
         <p><%= t("signin.new_user") %> <%= link_to t("home.signup"), signup_path %></p>
     </div>
 </div>

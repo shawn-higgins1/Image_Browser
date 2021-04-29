@@ -20,12 +20,7 @@ class UsersController < ApplicationController
         # Attempt to save the new user
         if @user.save
             # Send the email verification email if email is enabled
-            return redirect_to send_email_verification_path(@user) if Rails.configuration.email_enabled
-
-            # Sign in notify the user
-            signin(@user)
-            flash[:success] = I18n.t("signin.welcome_msg")
-            redirect_to root_path
+            redirect_to send_email_verification_path(@user)
         else
             # Display the errors with the account creatation for the user
             flash[:alert] = "<ul>"

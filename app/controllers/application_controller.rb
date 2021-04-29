@@ -31,9 +31,4 @@ class ApplicationController < ActionController::Base
 
         return redirect_to root_path if @user.nil?
     end
-
-    # Redirect to the home page if email isn't enabled
-    def verify_email_enabled
-        return redirect_to root_path unless Rails.configuration.email_enabled
-    end
 end

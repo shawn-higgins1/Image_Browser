@@ -3,23 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe EmailVerificationController, type: :controller do
-    describe "require email enabled" do
-        before do
-            allow(Rails.configuration).to receive(:email_enabled).and_return(false)
-        end
-
-        it "don't send if email is disabled" do
-            expect { get :send_email, params: { id: 1 } }.to change { ActionMailer::Base.deliveries.count }.by(0)
-            expect(response).to redirect_to root_path
-        end
-
-        it "don't verify if email is disabled" do
-            get :verify_account, params: { id: 1, token: 1 }
-
-            expect(response).to redirect_to root_path
-        end
-    end
-
     describe "GET #send_email" do
         it "don't send email if user is already verified" do
             user = create(:user, email_verified: true)

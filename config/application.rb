@@ -18,9 +18,8 @@ module ImageBrowser
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
 
-    config.default_host = ENV['DEFAULT_HOST']
-    config.email_enabled = true
     WillPaginate.per_page = 15
+    config.action_mailer.default_url_options = { host: "image_browser.com" }
 
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")

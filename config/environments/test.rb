@@ -9,8 +9,6 @@ require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-  config.email_enabled = true
-
   config.cache_classes = false
   config.action_view.cache_template_loading = true
 
@@ -63,4 +61,5 @@ Rails.application.configure do
 
   config.active_job.queue_adapter = :inline
   config.action_controller.default_url_options = { host: "test.host" }
+  config.action_mailer.default_url_options = { host: "test.host" }
 end
