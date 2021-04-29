@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class EmailVerificationController < ApplicationController
-    before_action :verify_email_enabled
     before_action :retrieve_user
 
     # Send an email verification email

@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
             # If email is enabled but the user hasn't verified their email address
             # don't log the user in instead just notify them that they need to
             # verify their account
-            if Rails.configuration.email_enabled && !user.email_verified
+            unless user.email_verified
                 flash[:info] = I18n.t("sessions.email_verification_required", link: send_email_verification_path(user))
                 return redirect_to root_path
             end

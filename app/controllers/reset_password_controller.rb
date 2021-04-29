@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class ResetPasswordController < ApplicationController
-    before_action :verify_email_enabled
     before_action :verify_user, except: [:forgot_password]
 
     # Render form where user can enter email address for retrieval

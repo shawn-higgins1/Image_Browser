@@ -64,23 +64,6 @@ RSpec.describe UsersController, type: :controller do
                                         "<li>Password is too short (minimum is 6 characters)</li>" \
                                         "<li>Password confirmation doesn't match Password</li></ul>")
         end
-
-        it "signin new user if email is disabled" do
-            allow(Rails.configuration).to receive(:email_enabled).and_return(false)
-
-            params = random_valid_user_params
-            post :create, params: params
-
-            user = User.find_by(email: params[:user][:email])
-
-            expect(user).not_to be_nil
-            expect(user.username).to eql(params[:user][:username])
-            # rubocop:disable RSpec/InstanceVariable
-            expect(@request.session[:user_id]).to eq(user.id)
-            # rubocop:enable RSpec/InstanceVariable
-            expect(response).to redirect_to root_path
-            expect(flash[:success]).to eq(I18n.t("signin.welcome_msg"))
-        end
     end
 
     describe "GET #edit" do
