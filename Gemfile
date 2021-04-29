@@ -48,7 +48,7 @@ group :development, :test do
     gem 'rails-controller-testing'
     gem 'coveralls_reborn', '~> 0.21.0', require: false
     gem 'simplecov', require: false
-    gem 'shoulda-matchers', '~> 3.1'
+    gem 'shoulda-matchers', '~> 4.5'
 
     gem 'faker'
     gem "factory_bot_rails"
