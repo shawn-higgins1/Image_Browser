@@ -16,6 +16,6 @@
 
         <p><%= t("user.profile.forgot_start") %> <%= link_to t("sigiin.here"), forgot_password_path(id: @user.id), method: :post %> <%= t("user.profile.forgot_end") %> </p>
 
-        <%= link_to t("user.profile.delete"), delete_photos_path(ids: @user.photos.pluck(:id)), id: "delete-selected", method: :delete, class: "btn btn-danger", data: {confirm: t("gallery.confirm_delete")} %>
+        <%= link_to t("user.profile.delete"), delete_photos_path(ids: @user.photos.pluck(:id)), id: "delete-selected", method: :delete, class: "btn btn-danger", data: { confirm: t("gallery.confirm_delete") } %>
     </div>
 </div>
