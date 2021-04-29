@@ -19,11 +19,16 @@
 require "simplecov"
 require "coveralls"
 
-SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
-  SimpleCov::Formatter::HTMLFormatter,
-  Coveralls::SimpleCov::Formatter
-]
-SimpleCov.start
+SimpleCov.start 'rails' do
+  if ENV['CI']
+    formatter Coveralls::SimpleCov::Formatter
+  else
+    formatter SimpleCov::Formatter::MultiFormatter.new([
+                                                         SimpleCov::Formatter::HTMLFormatter,
+                                                         Coveralls::SimpleCov::Formatter
+                                                       ])
+  end
+end
 
 require 'faker'
 require 'factory_bot_rails'
