@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
     <%= link_to root_path, class: "navbar-brand", id: "logo" do %>
-        <%= image_tag "logo_transparent.png",  width: "60", height: "60", class: "rounded" %>
+        <%= image_tag "logo_transparent.png", width: "60", height: "60", class: "rounded" %>
         <%= t("title") %>
     <% end %>
 
@@ -9,10 +9,10 @@
             <li class="nav-item <%= current_page("main", "home") %>">
                 <%= link_to t("home.title"), home_path, class: "nav-link" %>
             </li>
-            <li class="nav-item <%= current_page("users", "signin") %>"</li>
+            <li class="nav-item <%= current_page("users", "signin") %>">
                 <%= link_to t("gallery.title"), gallery_path, class: "nav-link" %>
             </li>
-            <li class="nav-item <%= current_page("main", "help") %>"</li>
+            <li class="nav-item <%= current_page("main", "help") %>">
                 <%= link_to t("help.title"), help_path, class: "nav-link" %>
             </li>
 
@@ -33,10 +33,10 @@
                     </ul>
                 </li>
             <% else %>
-                <li class="nav-item <%= current_page("users", "signin") %>"</li>
+                <li class="nav-item <%= current_page("users", "signin") %>">
                     <%= link_to t("signin.submit"), signin_path, class: "nav-link" %>
                 </li>
-                <li class="nav-item <%= current_page("users", "new") %>"</li>
+                <li class="nav-item <%= current_page("users", "new") %>">
                     <%= link_to t("header.signup"), signup_path, class: "nav-link" %>
                 </li>
             <% end %>

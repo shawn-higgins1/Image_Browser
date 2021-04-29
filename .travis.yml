@@ -6,8 +6,8 @@ rvm:
 jobs:
   include:
   - stage: test
-    name: rubocop
-    script: bundle exec rubocop
+    name: Linters
+    script: bundle exec rubocop && bundle exec erblint --lint-all
   - stage: test
     name: rspec
     script: gem install bundler & bundle exec rspec
