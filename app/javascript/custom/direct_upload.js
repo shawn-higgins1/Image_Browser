@@ -14,7 +14,7 @@ addEventListener("direct-upload:initialize", event => {
     img.setAttribute("width",50);
     img.setAttribute("height",50);
     img.file = file;
-    $("#direct-upload-" + id)[0].appendChild(img); // Assuming that "preview" is the div output where the content will be displayed.
+    $(`direct-upload-${id}`)[0].appendChild(img); // Assuming that "preview" is the div output where the content will be displayed.
     
     // Load a preview of the image to display while the files are uploading
     const reader = new FileReader();
