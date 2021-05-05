@@ -47,7 +47,7 @@ group :development, :test do
 
     gem 'rspec-rails'
     gem 'rails-controller-testing'
-    gem 'coveralls_reborn', '~> 0.22.0', require: false
+    gem 'coveralls_reborn', require: false
     gem 'simplecov', require: false
     gem 'shoulda-matchers', '~> 4.5'
 
