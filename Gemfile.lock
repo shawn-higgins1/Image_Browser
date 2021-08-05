@@ -89,7 +89,7 @@ GEM
       parser (>= 2.4)
       smart_properties
     bindex (0.8.1)
-    bootsnap (1.7.5)
+    bootsnap (1.7.7)
       msgpack (~> 1.0)
     bootstrap-will_paginate (1.0.0)
       will_paginate
